@@ -58,7 +58,7 @@ const Navigation = () => {
             Location Tracker
           </Text>
           <HStack spacing={2} flexWrap="wrap">
-            <NavLink href="/public">Home</NavLink>
+            <NavLink href="/">Home</NavLink>
             <NavLink href="/add-location">Add Location</NavLink>
             <NavLink href="/locations">Locations</NavLink>
             <NavLink href="/route">Route</NavLink>
