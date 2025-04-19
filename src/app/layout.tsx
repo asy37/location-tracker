@@ -5,6 +5,7 @@ import "./globals.css";
 
 import { Navigation } from "@/app/components/navigation";
 import { Providers } from "./providers";
+import { Center, Spinner } from "@chakra-ui/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,16 +24,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Providers>
           <Navigation />
-
-          {children}
+          <React.Suspense
+            fallback={
+              <Center minH="100vh">
+                <Spinner size="xl" color="blue.500" />
+              </Center>
+            }
+          >
+            {children}
+          </React.Suspense>
         </Providers>
       </body>
     </html>

@@ -1,7 +1,7 @@
 "use client";
 import { Location } from "@/app/types/location";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   Box,
@@ -12,18 +12,17 @@ import {
   Input,
   Button,
   useToast,
+  Spinner,
 } from "@chakra-ui/react";
 import { useLocationStore } from "../store/useLocationStore";
 import { Maps } from "../components/map";
 
-const LocationEdit = () => {
-  const toast = useToast();
-  const { locations, updateLocation } = useLocationStore();
-  const [selectedId, setSelectedId] = useState<string>("");
-  const [selectedLocation, setSelectedLocation] = useState<Location | null>(
-    null
-  );
+const SearchWrapper = () => {
   const searchParams = useSearchParams();
+  const { locations, updateLocation } = useLocationStore();
+  const toast = useToast();
+  const [selectedId, setSelectedId] = useState<string>("");
+  const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
 
   useEffect(() => {
     const id = searchParams.get("id");
@@ -75,20 +74,10 @@ const LocationEdit = () => {
   return (
     <Box p={6} display="flex" flexDirection="column" gap={10}>
       <VStack spacing={4} align="stretch">
-        <Box
-          w="full"
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          gap={4}
-        >
+        <Box w="full" display="flex" justifyContent="space-between" alignItems="center" gap={4}>
           <FormControl display="inline-block">
             <FormLabel>Bir konum seçin</FormLabel>
-            <Select
-              placeholder="Konum Seç"
-              onChange={handleSelectChange}
-              value={selectedId}
-            >
+            <Select placeholder="Konum Seç" onChange={handleSelectChange} value={selectedId}>
               {locations.map((loc) => (
                 <option key={loc.id} value={loc.id}>
                   {loc.name}
@@ -126,7 +115,7 @@ const LocationEdit = () => {
                 />
               </FormControl>
 
-              <Button w={"sm"} mt={8} colorScheme="blue" onClick={handleSubmit}>
+              <Button w="sm" mt={8} colorScheme="blue" onClick={handleSubmit}>
                 Kaydet
               </Button>
             </>
@@ -141,6 +130,14 @@ const LocationEdit = () => {
         />
       )}
     </Box>
+  );
+};
+
+const LocationEdit = () => {
+  return (
+    <Suspense fallback={<Spinner />}>
+      <SearchWrapper />
+    </Suspense>
   );
 };
 

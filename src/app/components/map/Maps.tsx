@@ -9,7 +9,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import { Location } from "@/app/types/location";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Spinner, Text } from "@chakra-ui/react";
 import { TiDeleteOutline } from "react-icons/ti";
 
 interface MapProps {
@@ -67,7 +67,7 @@ const Map = ({
     return defaultCenter;
   }, [userPosition, defaultCenter]);
 
-  if (!isLoaded) return <p>Harita yükleniyor...</p>;
+  if (!isLoaded) return <Spinner />;
 
   return (
     <GoogleMap
