@@ -15,8 +15,8 @@ import { Maps } from "../components/map";
 const AddLocation = () => {
   const { addLocation } = useLocationStore();
   const [selectedLocation, setSelectedLocation] = useState<{ lat: number; lng: number } | null>(null);
-  const [locationName, setLocationName] = useState("");
   const [markerColor, setMarkerColor] = useState("#FF0000");
+  const [locationName, setLocationName] = useState("");
 
   const handleSubmit = () => {
     if (!selectedLocation || !locationName.trim()) {
