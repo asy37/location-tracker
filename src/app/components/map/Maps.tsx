@@ -1,8 +1,13 @@
-'use client';
+"use client";
 
-import React, { useEffect, useMemo, useState } from 'react';
-import { GoogleMap, Marker, Polyline, useJsApiLoader } from '@react-google-maps/api';
-import { Location } from '@/app/types/location';
+import React, { useEffect, useMemo, useState } from "react";
+import {
+  GoogleMap,
+  Marker,
+  Polyline,
+  useJsApiLoader,
+} from "@react-google-maps/api";
+import { Location } from "@/app/types/location";
 
 interface MapProps {
   locations?: Location[];
@@ -17,16 +22,16 @@ interface MapProps {
 const containerStyle = (height: string, width: string) => ({
   width,
   height,
-  borderRadius: '8px',
-  boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+  borderRadius: "8px",
+  boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
 });
 
 const Map = ({
   locations = [],
   onLocationSelect,
   showRoute = false,
-  height = '400px',
-  width = '100%',
+  height = "400px",
+  width = "100%",
   zoom = 10,
   defaultCenter = { lat: 41.0082, lng: 28.9784 },
 }: MapProps) => {
@@ -34,7 +39,10 @@ const Map = ({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
   });
 
-  const [userPosition, setUserPosition] = useState<{ lat: number; lng: number } | null>(null);
+  const [userPosition, setUserPosition] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
 
   // Get user location on mount
   useEffect(() => {
@@ -44,7 +52,7 @@ const Map = ({
           setUserPosition({ lat: coords.latitude, lng: coords.longitude });
         },
         (err) => {
-          console.warn('Konum alınamadı:', err.message);
+          console.warn("Konum alınamadı:", err.message);
         }
       );
     }
@@ -76,9 +84,9 @@ const Map = ({
           icon={{
             path: google.maps.SymbolPath.CIRCLE,
             scale: 8,
-            fillColor: '#4285F4',
+            fillColor: "#4285F4",
             fillOpacity: 1,
-            strokeColor: 'white',
+            strokeColor: "white",
             strokeWeight: 2,
           }}
           title="Your Location"
@@ -92,16 +100,13 @@ const Map = ({
           position={{ lat: loc.latitude, lng: loc.longitude }}
           title={loc.name}
           icon={{
-            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            fillColor: loc.color,
-            fillOpacity: 1,
-            scale: 5,
-            strokeColor: 'white',
-            strokeWeight: 1,
+            url: `./assets/markerIcon/${loc.icon}.svg`,
+            scaledSize: new window.google.maps.Size(30, 30),
+            origin: new window.google.maps.Point(0, 0),
+            anchor: new window.google.maps.Point(15, 15),
           }}
         />
       ))}
-
       {/* Rota çizgisi */}
       {showRoute && userPosition && locations.length > 0 && (
         <Polyline
@@ -113,7 +118,7 @@ const Map = ({
             })),
           ]}
           options={{
-            strokeColor: '#FF0000',
+            strokeColor: "#FF0000",
             strokeOpacity: 1,
             strokeWeight: 2,
           }}
