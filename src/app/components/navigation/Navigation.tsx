@@ -55,14 +55,14 @@ const Navigation = () => {
             fontWeight="bold"
             color={titleColor}
           >
-            Location Tracker
+            YukaTech
           </Text>
           <HStack spacing={2} flexWrap="wrap">
-            <NavLink href="/">Home</NavLink>
-            <NavLink href="/add-location">Add Location</NavLink>
-            <NavLink href="/locations">Locations</NavLink>
-            <NavLink href="/location-edit">Location Edit</NavLink>
-            <NavLink href="/route">Route</NavLink>
+            <NavLink href="/">Ana Sayfa</NavLink>
+            <NavLink href="/add-location">Lokasyon Ekle</NavLink>
+            <NavLink href="/locations">Lokasyon Listesi</NavLink>
+            <NavLink href="/location-edit">Lokasyon Düzenle</NavLink>
+            <NavLink href="/route">Rotalar</NavLink>
           </HStack>
         </Stack>
       </Container>

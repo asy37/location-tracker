@@ -22,10 +22,10 @@ export default function Home() {
     <Box maxW="4xl" mx="auto">
       <VStack textAlign="center" py={12} spacing={4}>
         <Heading as="h1" size="2xl" color="blue.600" mb={2}>
-          Location Tracker
+          Lokasyon Takibi Uygulaması
         </Heading>
         <Text fontSize="xl" color="gray.600" mb={8}>
-          Track, manage, and navigate between your favorite locations
+          Favori konumlarınız arasında takip edin, yönetin ve gezinin
         </Text>
       </VStack>
 
@@ -40,17 +40,15 @@ export default function Home() {
         >
           <Flex alignItems="center" mb={4}>
             <Center bg="blue.100" p={3} rounded="full" mr={4}>
-              <Center bg="blue.100" p={3} rounded="full" mr={4}>
-                <FiMap />
-              </Center>
+              <FiMap />
             </Center>
             <Heading as="h2" size="lg">
-              Add Locations
+              Lokasyon Ekle
             </Heading>
           </Flex>
           <Text color="gray.600" mb={4}>
-            Add your favorite locations by selecting them on a map. Give each
-            location a name and choose a custom color for its marker.
+            Favori konumlarınızı haritada seçerek ekleyin. Her konuma bir isim
+            verin ve işaretçisi için özel bir renk seçin.
           </Text>
           <Button
             as={NextLink}
@@ -58,7 +56,7 @@ export default function Home() {
             colorScheme="blue"
             size="md"
           >
-            Add Location
+            Lokasyon Ekle
           </Button>
         </Box>
 
@@ -75,15 +73,15 @@ export default function Home() {
               <BsPeopleFill />
             </Center>
             <Heading as="h2" size="lg">
-              Manage Locations
+              Lokasyanları Yönet
             </Heading>
           </Flex>
           <Text color="gray.600" mb={4}>
-            View all your saved locations, edit their details, or remove them.
-            Click on a location to see its coordinates.
+            Tüm kayıtlı konumlarınızı görüntüleyin, ayrıntılarını düzenleyin
+            veya kaldırın. Koordinatlarını görmek için bir konuma tıklayın.
           </Text>
           <Button as={NextLink} href="/locations" colorScheme="green" size="md">
-            View Locations
+            Lokasyonları Görüntüle
           </Button>
         </Box>
 
@@ -98,19 +96,19 @@ export default function Home() {
           >
             <Flex alignItems="center" mb={4}>
               <Center bg="purple.100" p={3} rounded="full" mr={4}>
-              <IoLocationOutline />
+                <IoLocationOutline />
               </Center>
               <Heading as="h2" size="lg">
-                Generate Routes
+                Rota Oluştur
               </Heading>
             </Flex>
             <Text color="gray.600" mb={4}>
-              Generate the optimal route between all your saved locations,
-              starting from your current position. The route is calculated to
-              minimize travel distance.
+              Mevcut konumunuzdan başlayarak, tüm kayıtlı konumlarınız arasında
+              en uygun rotayı oluşturun. Rota, seyahat mesafesini en aza
+              indirmek için hesaplanır.
             </Text>
             <Button as={NextLink} href="/route" colorScheme="purple" size="md">
-              Show Route
+              Rotaları Göster
             </Button>
           </Box>
         </GridItem>
@@ -118,22 +116,23 @@ export default function Home() {
 
       <Box bg="blue.50" rounded="lg" p={6} mb={8}>
         <Heading as="h2" size="md" mb={4}>
-          How It Works
+          Nasıl Çalışır
         </Heading>
         <List spacing={2} stylePosition="inside">
           <ListItem>
-            1. Add locations by selecting points on the map and giving them
-            names and colors
+            1. Haritada noktaları seçerek ve onlara adlar, ikonlar ve renkler
+            vererek konumlar ekleyin
           </ListItem>
           <ListItem>
-            2. View and manage your saved locations in the locations list
+            2. Kaydedilen konumlarınızı konumlar listesinde görüntüleyin ve
+            yönetin
           </ListItem>
           <ListItem>
-            3. Generate an optimal route between all your locations
+            3. Tüm lokasyonlarınız arasında optimum bir rota oluşturun
           </ListItem>
           <ListItem>
-            4. All your data is stored locally in your browser - no account
-            needed!
+            4. Tüm verileriniz yerel olarak tarayıcınızda saklanır - hesaba
+            gerek yok!
           </ListItem>
         </List>
       </Box>

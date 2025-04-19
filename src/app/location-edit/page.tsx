@@ -8,7 +8,6 @@ import {
   FormControl,
   FormLabel,
   Select,
-  Heading,
   VStack,
   Input,
   Button,
@@ -21,7 +20,9 @@ const LocationEdit = () => {
   const toast = useToast();
   const { locations, updateLocation } = useLocationStore();
   const [selectedId, setSelectedId] = useState<string>("");
-  const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<Location | null>(
+    null
+  );
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -72,61 +73,72 @@ const LocationEdit = () => {
   };
 
   return (
-    <Box p={6}>
-      <Heading mb={6}>Konum Düzenle</Heading>
-      <FormControl mb={4}>
-        <FormLabel>Bir konum seçin</FormLabel>
-        <Select
-          placeholder="Konum Seç"
-          onChange={handleSelectChange}
-          value={selectedId}
+    <Box p={6} display="flex" flexDirection="column" gap={10}>
+      <VStack spacing={4} align="stretch">
+        <Box
+          w="full"
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          gap={4}
         >
-          {locations.map((loc) => (
-            <option key={loc.id} value={loc.id}>
-              {loc.name}
-            </option>
-          ))}
-        </Select>
-      </FormControl>
+          <FormControl display="inline-block">
+            <FormLabel>Bir konum seçin</FormLabel>
+            <Select
+              placeholder="Konum Seç"
+              onChange={handleSelectChange}
+              value={selectedId}
+            >
+              {locations.map((loc) => (
+                <option key={loc.id} value={loc.id}>
+                  {loc.name}
+                </option>
+              ))}
+            </Select>
+          </FormControl>
 
+          {selectedLocation && (
+            <>
+              <FormControl>
+                <FormLabel>Konum Adı</FormLabel>
+                <Input
+                  value={selectedLocation.name}
+                  onChange={(e) =>
+                    setSelectedLocation({
+                      ...selectedLocation,
+                      name: e.target.value,
+                    })
+                  }
+                />
+              </FormControl>
+
+              <FormControl>
+                <FormLabel>Renk</FormLabel>
+                <Input
+                  type="color"
+                  value={selectedLocation.color}
+                  onChange={(e) =>
+                    setSelectedLocation({
+                      ...selectedLocation,
+                      color: e.target.value,
+                    })
+                  }
+                />
+              </FormControl>
+
+              <Button w={"sm"} mt={8} colorScheme="blue" onClick={handleSubmit}>
+                Kaydet
+              </Button>
+            </>
+          )}
+        </Box>
+      </VStack>
       {selectedLocation && (
-        <VStack spacing={4} align="stretch">
-          <FormControl>
-            <FormLabel>Konum Adı</FormLabel>
-            <Input
-              value={selectedLocation.name}
-              onChange={(e) =>
-                setSelectedLocation({
-                  ...selectedLocation,
-                  name: e.target.value,
-                })
-              }
-            />
-          </FormControl>
-
-          <FormControl>
-            <FormLabel>Renk</FormLabel>
-            <Input
-              type="color"
-              value={selectedLocation.color}
-              onChange={(e) =>
-                setSelectedLocation({
-                  ...selectedLocation,
-                  color: e.target.value,
-                })
-              }
-            />
-          </FormControl>
-
-          <Maps
-            locations={[selectedLocation]}
-            onLocationSelect={handleMapUpdate}
-          />
-
-          <Button colorScheme="blue" onClick={handleSubmit}>
-            Kaydet
-          </Button>
-        </VStack>
+        <Maps
+          height="600px"
+          locations={[selectedLocation]}
+          onLocationSelect={handleMapUpdate}
+        />
       )}
     </Box>
   );

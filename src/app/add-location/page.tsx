@@ -14,7 +14,6 @@ import { useLocationStore } from "../store/useLocationStore";
 import { IconSelect } from "../components/icon-select";
 import { Maps } from "../components/map";
 
-
 const AddLocation = () => {
   const toast = useToast();
   const { addLocation } = useLocationStore();
@@ -44,14 +43,13 @@ const AddLocation = () => {
       latitude: selectedLocation.lat,
       longitude: selectedLocation.lng,
       color: markerColor,
-      icon: selectedIcon, // Icon değeri eklendi
+      icon: selectedIcon,
     });
 
-    // Temizle
     setSelectedLocation(null);
     setLocationName("");
     setMarkerColor("#FF0000");
-    setSelectedIcon(""); // Icon state'ini resetle
+    setSelectedIcon("");
 
     toast({
       title: "Konum Eklendi.",
@@ -65,35 +63,23 @@ const AddLocation = () => {
   return (
     <Box p={4}>
       <VStack spacing={4}>
-        <Maps
-          onLocationSelect={(lat, lng) => setSelectedLocation({ lat, lng })}
-          locations={
-            selectedLocation
-              ? [
-                  {
-                    id: "temp",
-                    name: locationName || "Yeni Konum",
-                    latitude: selectedLocation.lat,
-                    longitude: selectedLocation.lng,
-                    color: markerColor,
-                    icon: selectedIcon, 
-                  },
-                ]
-              : []
-          }
-        />
-
-        <Box w={"sm"}>
+        <Box
+          w="full"
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          gap={4}
+        >
           <FormControl>
             <FormLabel>Konum Adı</FormLabel>
             <Input
               value={locationName}
               onChange={(e) => setLocationName(e.target.value)}
-              placeholder="Konum adı"
+              placeholder="Konum adı giriniz"
             />
           </FormControl>
 
-          <FormControl mt={4}>
+          <FormControl>
             <FormLabel>Marker Rengi</FormLabel>
             <Input
               type="color"
@@ -108,10 +94,28 @@ const AddLocation = () => {
             onChange={setSelectedIcon}
           />
 
-          <Button w={"sm"} mt={4} colorScheme="blue" onClick={handleSubmit}>
+          <Button w={"sm"} mt={8} colorScheme="blue" onClick={handleSubmit}>
             Konumu Ekle
           </Button>
         </Box>
+        <Maps
+          height="600px"
+          onLocationSelect={(lat, lng) => setSelectedLocation({ lat, lng })}
+          locations={
+            selectedLocation
+              ? [
+                  {
+                    id: "temp",
+                    name: locationName || "Yeni Konum",
+                    latitude: selectedLocation.lat,
+                    longitude: selectedLocation.lng,
+                    color: markerColor,
+                    icon: selectedIcon,
+                  },
+                ]
+              : []
+          }
+        />
       </VStack>
     </Box>
   );
