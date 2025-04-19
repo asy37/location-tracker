@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocationStore } from '../store/useLocationStore';
 import { Location } from '../types/location';
 import { Maps } from '../components/map';
@@ -34,7 +34,7 @@ const Route = () => {
 
   return (
     <div style={{ width: '100%' }}>
-      <Maps locations={sortedLocations} showRoute />
+      <Maps locations={sortedLocations} height='800px' showRoute />
     </div>
   );
 };
