@@ -67,15 +67,11 @@ const Locations = () => {
                 >
                   <FiTrash2 /> Sil
                 </Button>
-                <Button
-                  size="sm"
-                  colorScheme="gray"
-                  onClick={() => handleRemoveLocation(location.id)}
-                >
-                  <Link href="/location-edit">
+                <Link href={`/location-edit?id=${location.id}`}>
+                  <Button size="sm" colorScheme="gray">
                     <IoIosArrowForward />
-                  </Link>{" "}
-                </Button>
+                  </Button>
+                </Link>{" "}
               </Td>
             </Tr>
           ))}

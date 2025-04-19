@@ -61,6 +61,7 @@ const Navigation = () => {
             <NavLink href="/">Home</NavLink>
             <NavLink href="/add-location">Add Location</NavLink>
             <NavLink href="/locations">Locations</NavLink>
+            <NavLink href="/location-edit">Location Edit</NavLink>
             <NavLink href="/route">Route</NavLink>
           </HStack>
         </Stack>
