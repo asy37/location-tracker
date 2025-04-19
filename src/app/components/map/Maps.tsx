@@ -104,22 +104,22 @@
         ))}
 
         {/* Rota çizgisi */}
-        {showRoute && userPosition && locations.length > 0 && (
-          <Polyline
-            path={[
-              userPosition,
-              ...locations.map((loc) => ({
-                lat: loc.latitude,
-                lng: loc.longitude,
-              })),
-            ]}
-            options={{
-              strokeColor: '#FF0000',
-              strokeOpacity: 1,
-              strokeWeight: 2,
-            }}
-          />
-        )}
+        {showRoute && userPosition && locations.length > 0 &&
+          locations.map((loc, index) => (
+            <Polyline
+              key={`line-${index}`}
+              path={[
+                userPosition,
+                { lat: loc.latitude, lng: loc.longitude },
+              ]}
+              options={{
+                strokeColor: '#FF0000',
+                strokeOpacity: 1,
+                strokeWeight: 2,
+              }}
+            />
+          ))
+        }
       </GoogleMap>
     );
   };
