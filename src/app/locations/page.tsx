@@ -13,16 +13,13 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useLocationStore } from "../store/useLocationStore";
-import { FiEdit, FiTrash2 } from "react-icons/fi";
-import { useState } from "react";
-import { EditLocationModal } from "../components/modal";
+import { FiTrash2 } from "react-icons/fi";
+import { IoIosArrowForward } from "react-icons/io";
+import Link from "next/link";
 
 const Locations = () => {
-  const { locations, deleteLocation, updateLocation } = useLocationStore();
+  const { locations, deleteLocation } = useLocationStore();
   const toast = useToast();
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [selectedLocationToEdit, setSelectedLocationToEdit] =
-    useState<{ id: string; name: string; color: string } | null>(null);
 
   const handleRemoveLocation = (id: string) => {
     deleteLocation(id);
@@ -35,46 +32,14 @@ const Locations = () => {
     });
   };
 
-  const handleEditLocation = (location: {
-    id: string;
-    name: string;
-    color: string;
-  }) => {
-    setSelectedLocationToEdit(location);
-    setIsEditModalOpen(true);
-  };
-
-  const handleCloseEditModal = () => {
-    setIsEditModalOpen(false);
-    setSelectedLocationToEdit(null);
-  };
-
-  const handleSaveEditedLocation = (
-    id: string,
-    name: string,
-    color: string
-  ) => {
-    updateLocation(id, { name, color });
-    toast({
-      title: "Konum Güncellendi.",
-      description: "Seçilen konum başarıyla güncellendi.",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-    });
-    handleCloseEditModal();
-  };
-
   return (
-    <TableContainer>
-      <Table variant="simple">
+    <TableContainer maxW="800px" mx="auto" mt={8} px={4}>
+      <Table variant="simple" size="md" width="full">
         <TableCaption>Kaydedilmiş Konumlar</TableCaption>
         <Thead>
           <Tr>
-            <Th>Ad</Th>
-            <Th>Enlem</Th>
-            <Th>Boylam</Th>
-            <Th>Renk</Th>
+            <Th>Konum Adı</Th>
+            <Th>Marker</Th>
             <Th>Eylemler</Th>
           </Tr>
         </Thead>
@@ -82,39 +47,34 @@ const Locations = () => {
           {locations.map((location) => (
             <Tr key={location.id}>
               <Td>{location.name}</Td>
-              <Td>{location.latitude}</Td>
-              <Td>{location.longitude}</Td>
               <Td>
-                <div
-                  style={{
-                    width: "20px",
-                    height: "20px",
-                    backgroundColor: location.color,
-                    borderRadius: "4px",
-                  }}
-                />
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill={location.color}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d={location.icon} />
+                </svg>
               </Td>
               <Td>
                 <Button
-                  size="sm"
-                  colorScheme="yellow"
                   mr={2}
-                  onClick={() =>
-                    handleEditLocation({
-                      id: location.id,
-                      name: location.name,
-                      color: location.color,
-                    })
-                  }
-                >
-                  <FiEdit /> Düzenle
-                </Button>
-                <Button
                   size="sm"
                   colorScheme="red"
                   onClick={() => handleRemoveLocation(location.id)}
                 >
                   <FiTrash2 /> Sil
+                </Button>
+                <Button
+                  size="sm"
+                  colorScheme="gray"
+                  onClick={() => handleRemoveLocation(location.id)}
+                >
+                  <Link href="/location-edit">
+                    <IoIosArrowForward />
+                  </Link>{" "}
                 </Button>
               </Td>
             </Tr>
@@ -128,13 +88,6 @@ const Locations = () => {
           )}
         </Tbody>
       </Table>
-
-      <EditLocationModal
-        isOpen={isEditModalOpen}
-        onClose={handleCloseEditModal}
-        location={selectedLocationToEdit}
-        onSave={handleSaveEditedLocation}
-      />
     </TableContainer>
   );
 };

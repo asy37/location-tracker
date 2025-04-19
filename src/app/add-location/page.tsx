@@ -25,7 +25,7 @@ const AddLocation = () => {
   } | null>(null);
   const [markerColor, setMarkerColor] = useState("#FF0000");
   const [locationName, setLocationName] = useState("");
-  const [selectedIcon, setSelectedIcon] = useState("marker");
+  const [selectedIcon, setSelectedIcon] = useState("");
 
   const handleSubmit = () => {
     if (!selectedLocation || !locationName.trim()) {
@@ -51,7 +51,7 @@ const AddLocation = () => {
     setSelectedLocation(null);
     setLocationName("");
     setMarkerColor("#FF0000");
-    setSelectedIcon("marker"); // Icon state'ini resetle
+    setSelectedIcon(""); // Icon state'ini resetle
 
     toast({
       title: "Konum Eklendi.",
