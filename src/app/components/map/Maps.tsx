@@ -49,7 +49,6 @@ const Map = ({
 
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
 
-  // Get user location on mount
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -63,7 +62,6 @@ const Map = ({
     }
   }, []);
 
-  // Harita merkezini kullanıcı konumu varsa ona göre ayarla
   const center = useMemo(() => {
     if (userPosition) return userPosition;
     return defaultCenter;
@@ -82,7 +80,6 @@ const Map = ({
         }
       }}
     >
-      {/* Kullanıcı pozisyonu */}
       {userPosition && (
         <Marker
           position={userPosition}
@@ -98,7 +95,6 @@ const Map = ({
         />
       )}
 
-      {/* Diğer Lokasyonlar */}
       {locations.map((loc) => (
         <Marker
           key={loc.id}
@@ -117,7 +113,6 @@ const Map = ({
         />
       ))}
 
-      {/* Rota çizgisi */}
       {showRoute &&
         userPosition &&
         locations.length > 0 &&
@@ -126,14 +121,13 @@ const Map = ({
             key={`line-${index}`}
             path={[userPosition, { lat: loc.latitude, lng: loc.longitude }]}
             options={{
-              strokeColor: "#FF0000",
+              strokeColor: loc.color,
               strokeOpacity: 1,
               strokeWeight: 2,
             }}
           />
         ))}
 
-      {/* InfoWindow */}
       {locations.map(
         (loc) =>
           showRoute &&
@@ -147,16 +141,25 @@ const Map = ({
                 <Box
                   display="flex"
                   w="full"
-                  justifyContent='space-between'
+                  justifyContent="space-between"
                   alignItems="center"
                 >
-                  <Text fontSize='md' fontWeight="bold">Rota bilgileri :</Text>
-                  <Box cursor='pointer' onClick={() => setActiveMarker(null)}>
-                    <TiDeleteOutline />
+                  <Text fontSize="md" fontWeight="bold">
+                    Rota bilgileri :
+                  </Text>
+                  <Box cursor="pointer" onClick={() => setActiveMarker(null)}>
+                    <TiDeleteOutline size={18} />
                   </Box>
                 </Box>
-                <Box textColor='gray.500' fontWeight="semibold">Enlem: {loc.latitude}</Box>
-                <Box textColor='gray.500' fontWeight="semibold">Boylam: {loc.longitude}</Box>
+                <Box textColor="gray.500" fontWeight="semibold">
+                  Lokasyon Adı: {loc.name}
+                </Box>
+                <Box textColor="gray.500" fontWeight="semibold">
+                  Enlem: {loc.latitude}
+                </Box>
+                <Box textColor="gray.500" fontWeight="semibold">
+                  Boylam: {loc.longitude}
+                </Box>
               </Box>
             </InfoWindow>
           )

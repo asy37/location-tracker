@@ -24,7 +24,7 @@ const AddLocation = () => {
   } | null>(null);
   const [markerColor, setMarkerColor] = useState("#FF0000");
   const [locationName, setLocationName] = useState("");
-  const [selectedIcon, setSelectedIcon] = useState("");
+  const [selectedIcon, setSelectedIcon] = useState("M3 11 L22 2 L13 21 L11 13 L3 11 Z");
 
   const handleSubmit = () => {
     if (!selectedLocation || !locationName.trim()) {

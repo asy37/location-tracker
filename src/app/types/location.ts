@@ -4,5 +4,5 @@ export interface Location {
   latitude: number;
   longitude: number;
   color: string;
-  icon: string
+  icon: string;
 }

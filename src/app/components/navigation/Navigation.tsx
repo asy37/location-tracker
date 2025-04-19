@@ -1,24 +1,30 @@
-'use client';
+"use client";
 
-import React, { ReactNode } from 'react';
-import NextLink from 'next/link';
-import { usePathname } from 'next/navigation';
-import { 
-  Box, 
-  Container, 
-  HStack, 
-  Link, 
-  Text, 
+import React, { ReactNode } from "react";
+import NextLink from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  Box,
+  Container,
+  HStack,
+  Link,
+  Text,
   useColorModeValue,
-  Stack
-} from '@chakra-ui/react';
+  Stack,
+} from "@chakra-ui/react";
 
 const Navigation = () => {
   const pathname = usePathname();
-  const bgColor = useColorModeValue('white', 'gray.800');
-  const titleColor = useColorModeValue('blue.600', 'blue.300');
+  const bgColor = useColorModeValue("white", "gray.800");
+  const titleColor = useColorModeValue("blue.600", "blue.300");
 
-  const NavLink = ({ href, children }: { href: string; children: ReactNode }) => {
+  const NavLink = ({
+    href,
+    children,
+  }: {
+    href: string;
+    children: ReactNode;
+  }) => {
     const isActive = pathname === href;
 
     return (
@@ -27,14 +33,14 @@ const Navigation = () => {
         href={href}
         px={4}
         py={2}
-        rounded={'md'}
-        bg={isActive ? 'blue.50' : 'transparent'}
-        color={isActive ? 'blue.700' : 'gray.700'}
+        rounded={"md"}
+        bg={isActive ? "blue.50" : "transparent"}
+        color={isActive ? "blue.700" : "gray.700"}
         _hover={{
-          textDecoration: 'none',
-          bg: isActive ? 'blue.50' : 'gray.100',
+          textDecoration: "none",
+          bg: isActive ? "blue.50" : "gray.100",
         }}
-        transition={'all 0.2s'}
+        transition={"all 0.2s"}
       >
         {children}
       </Link>
@@ -45,22 +51,18 @@ const Navigation = () => {
     <Box as="nav" bg={bgColor} boxShadow="md" py={4} mb={6}>
       <Container maxW="container.xl">
         <Stack
-          direction={{ base: 'column', sm: 'row' }}
+          direction={{ base: "column", sm: "row" }}
           justifyContent="space-between"
           alignItems="center"
           spacing={4}
         >
-          <Text
-            fontSize="xl"
-            fontWeight="bold"
-            color={titleColor}
-          >
+          <Text fontSize="xl" fontWeight="bold" color={titleColor}>
             YukaTech
           </Text>
           <HStack spacing={2} flexWrap="wrap">
             <NavLink href="/">Ana Sayfa</NavLink>
             <NavLink href="/add-location">Lokasyon Ekle</NavLink>
-            <NavLink href="/locations">Lokasyon Listesi</NavLink>
+            <NavLink href="/locations-list">Lokasyon Listesi</NavLink>
             <NavLink href="/location-edit">Lokasyon Düzenle</NavLink>
             <NavLink href="/route">Rotalar</NavLink>
           </HStack>
