@@ -11,6 +11,11 @@ import {
   TableContainer,
   Button,
   useToast,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Box,
+  PopoverHeader,
 } from "@chakra-ui/react";
 import { useLocationStore } from "../store/useLocationStore";
 import { FiTrash2 } from "react-icons/fi";
@@ -39,26 +44,38 @@ const Locations = () => {
         <Thead>
           <Tr>
             <Th>Konum Adı</Th>
-            <Th>Marker</Th>
-            <Th>Eylemler</Th>
+            <Th textAlign="center">Marker</Th>
+            <Th textAlign="end">Eylemler</Th>
           </Tr>
         </Thead>
         <Tbody>
           {locations.map((location) => (
             <Tr key={location.id}>
               <Td>{location.name}</Td>
-              <Td>
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill={location.color}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d={location.icon} />
-                </svg>
+              <Td display='flex' alignContent='center' justifyContent='center'>
+                <Popover placement="right">
+                  <PopoverTrigger>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill={location.color}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d={location.icon} />
+                    </svg>
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    <Box>
+                      <PopoverHeader>Enlem: {location.latitude}</PopoverHeader>
+                      <PopoverHeader>
+                        Boylam: {location.longitude}
+                      </PopoverHeader>
+                    </Box>
+                  </PopoverContent>
+                </Popover>
               </Td>
-              <Td>
+              <Td textAlign="end">
                 <Button
                   mr={2}
                   size="sm"
