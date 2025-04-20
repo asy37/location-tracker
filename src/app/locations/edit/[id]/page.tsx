@@ -19,10 +19,8 @@ export default async function Page({
   const { id } = await params;
   const initialData = await getLocations();
 
-  // params.id ile lokasyonunuzu buluyoruz
   const selected = initialData.find((l: Location) => l.id === id);
 
-  // Eğer lokasyon bulunamazsa 404 hatası döndürüyoruz
   if (!selected) return notFound();
 
   return (

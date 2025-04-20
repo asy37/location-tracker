@@ -1,0 +1,1 @@
+export { DeleteLocationButton } from "./DeleteLocation";

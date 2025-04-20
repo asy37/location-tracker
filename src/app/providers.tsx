@@ -1,13 +1,11 @@
 "use client";
 
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { CacheProvider } from "@emotion/react"; // @emotion/react'ı kullanıyoruz
-import createCache from "@emotion/cache"; // Cache oluşturmak için
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
 
-// Emotion cache oluşturma
 const emotionCache = createCache({ key: "chakra", prepend: true });
 
-// Define the theme
 const theme = extendTheme({
   fonts: {
     heading: "var(--font-geist-sans)",

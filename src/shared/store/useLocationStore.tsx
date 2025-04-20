@@ -16,12 +16,10 @@ interface LocationState {
 export const useLocationStore = create<LocationState>()((set, get) => ({
   locations: [],
 
-  // SetInitial Location
   setLocations: async (locations) => {
     set(() => ({ locations }));
   },
 
-  // Add Location - API ile veri ekleme
   addLocation: async (payload) => {
     const res = await addLocation({ payload });
 
@@ -35,7 +33,6 @@ export const useLocationStore = create<LocationState>()((set, get) => ({
     }
   },
 
-  // Update Location - API ile veri güncelleme
   updateLocation: async (id, payload) => {
     const res = await updateLocation({ id, payload });
 
@@ -51,7 +48,6 @@ export const useLocationStore = create<LocationState>()((set, get) => ({
     }
   },
 
-  // Delete Location - API ile veri silme
   deleteLocation: async (id) => {
     const res = await deleteLocation({ id });
 
