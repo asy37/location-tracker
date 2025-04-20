@@ -13,6 +13,7 @@ import {
 import { useLocationStore } from "@/shared/store/useLocationStore";
 import { Maps } from "@/shared/components/map";
 import { Location } from "@/shared/types/location";
+import { IconSelect } from "@/shared/components/select";
 
 interface Props {
   initialData: Location[];
@@ -75,7 +76,6 @@ export const EditLocationContainer = ({ initialData, initialId }: Props) => {
           flexDirection={{ base: "column", md: "row" }}
           gap={{ base: 2, md: 4 }}
         >
-
           {selectedLocation && (
             <>
               <FormControl>
@@ -86,6 +86,18 @@ export const EditLocationContainer = ({ initialData, initialId }: Props) => {
                     setSelectedLocation({
                       ...selectedLocation,
                       name: e.target.value,
+                    })
+                  }
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Marker Ikonu</FormLabel>
+                <IconSelect
+                  value={selectedLocation.icon}
+                  onChange={(value) =>
+                    setSelectedLocation({
+                      ...selectedLocation,
+                      icon: value,
                     })
                   }
                 />

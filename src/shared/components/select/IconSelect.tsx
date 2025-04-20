@@ -16,7 +16,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { SymbolOption, symbolOptions } from "@/shared/utils/symbolOptions";
 
 interface IconSelectProps {
-  label: string;
+  label?: string;
   value: string;
   onChange: (value: string) => void;
 }
