@@ -2,10 +2,6 @@ import { NextResponse } from "next/server";
 import { Location } from "@/shared/types/location";
 
 const locations: Location[] = [];
-
-export async function LIST() {
-  return NextResponse.json(locations);
-}
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id");
