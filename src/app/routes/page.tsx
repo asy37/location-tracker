@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useLocationStore } from "../store/useLocationStore";
-import { Location } from "../types/location";
-import { Maps } from "../components/map";
+import { useLocationStore } from "@/shared/store/useLocationStore";
+import { Location } from "@/shared/types/location";
+import { Maps } from "@/shared/components/map";
 
 const Route = () => {
   const { locations } = useLocationStore();

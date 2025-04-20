@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
-import { HomeContent, HomeHeader, HowToUse } from "./components/home";
+import { HomeContent, HomeHeader, HowToUse } from "../features/home";
 
 export default function Home() {
   return (

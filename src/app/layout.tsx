@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import { Navigation } from "@/app/components/navigation";
+import { Navigation } from "@/shared/components/navigation";
 import { Providers } from "./providers";
 import { Center, Spinner } from "@chakra-ui/react";
 

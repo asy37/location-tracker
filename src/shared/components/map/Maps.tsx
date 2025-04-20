@@ -8,7 +8,7 @@ import {
   useJsApiLoader,
   InfoWindow,
 } from "@react-google-maps/api";
-import { Location } from "@/app/types/location";
+import { Location } from "@/shared/types/location";
 import { Box, Spinner, Text } from "@chakra-ui/react";
 import { TiDeleteOutline } from "react-icons/ti";
 

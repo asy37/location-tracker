@@ -10,32 +10,33 @@ import {
   TableCaption,
   TableContainer,
   Button,
-  useToast,
   Popover,
   PopoverTrigger,
   PopoverContent,
   Box,
   PopoverHeader,
 } from "@chakra-ui/react";
-import { useLocationStore } from "../store/useLocationStore";
-import { FiTrash2 } from "react-icons/fi";
+import { useLocationStore } from "@/shared/store/useLocationStore";
 import { IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
+import { Location } from "@/shared/types/location";
+import { DeleteLocationButton } from "../delete-location/DeleteLocation";
+import { useEffect } from "react";
 
-const Locations = () => {
-  const { locations, deleteLocation } = useLocationStore();
-  const toast = useToast();
+interface Props {
+  initialData: Location[];
+}
 
-  const handleRemoveLocation = (id: string) => {
-    deleteLocation(id);
-    toast({
-      title: "Konum Silindi.",
-      description: "Seçilen konum başarıyla silindi.",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-    });
-  };
+export const LocationsContainer = ({ initialData }: Props) => {
+  const { locations, setLocations } = useLocationStore();
+
+  useEffect(() => {
+    if (initialData && initialData.length > 0) {
+      setLocations(initialData);
+    }
+  }, [initialData, setLocations]);
+
+  const locationList = locations;
 
   return (
     <TableContainer maxW="800px" mx="auto" mt={8} px={4}>
@@ -49,7 +50,7 @@ const Locations = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {locations.map((location) => (
+          {locationList.map((location) => (
             <Tr key={location.id}>
               <Td>{location.name}</Td>
               <Td display="flex" alignContent="center" justifyContent="center">
@@ -80,24 +81,16 @@ const Locations = () => {
                 </Popover>
               </Td>
               <Td textAlign="end">
-                <Button
-                  cursor="pointer"
-                  mr={2}
-                  size="sm"
-                  colorScheme="red"
-                  onClick={() => handleRemoveLocation(location.id)}
-                >
-                  <FiTrash2 /> Sil
-                </Button>
-                <Link href={`/location-edit?id=${location.id}`}>
+                <DeleteLocationButton id={location.id} />
+                <Link href={`/locations/edit/${location.id}`}>
                   <Button size="sm" colorScheme="gray">
                     <IoIosArrowForward />
                   </Button>
-                </Link>{" "}
+                </Link>
               </Td>
             </Tr>
           ))}
-          {locations.length === 0 && (
+          {locationList.length === 0 && (
             <Tr>
               <Td colSpan={5} textAlign="center">
                 Henüz kaydedilmiş konum yok.
@@ -109,5 +102,3 @@ const Locations = () => {
     </TableContainer>
   );
 };
-
-export default Locations;

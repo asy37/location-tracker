@@ -1,8 +1,6 @@
 "use client";
-import { Location } from "@/app/types/location";
 
-import React, { useState, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   FormControl,
@@ -11,31 +9,31 @@ import {
   Input,
   Button,
   useToast,
-  Spinner,
 } from "@chakra-ui/react";
-import { useLocationStore } from "../store/useLocationStore";
-import { Maps } from "../components/map";
-import { LocationSelect } from "../components/select";
+import { useLocationStore } from "@/shared/store/useLocationStore";
+import { Maps } from "@/shared/components/map";
+import { Location } from "@/shared/types/location";
 
-const SearchWrapper = () => {
-  const searchParams = useSearchParams();
-  const { locations, updateLocation } = useLocationStore();
+interface Props {
+  initialData: Location[];
+  initialId: string;
+}
+
+export const EditLocationContainer = ({ initialData, initialId }: Props) => {
+  const { updateLocation } = useLocationStore();
   const toast = useToast();
-  const [selectedId, setSelectedId] = useState<string>("");
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(
     null
   );
 
   useEffect(() => {
-    const id = searchParams.get("id");
-    if (id) {
-      const loc = locations.find((l) => l.id === id);
+    if (initialId) {
+      const loc = initialData.find((l) => l.id === initialId);
       if (loc) {
-        setSelectedId(id);
         setSelectedLocation({ ...loc });
       }
     }
-  }, [searchParams, locations]);
+  }, [initialId, initialData]);
 
   const handleMapUpdate = (lat: number, lng: number) => {
     if (selectedLocation) {
@@ -48,8 +46,8 @@ const SearchWrapper = () => {
   };
 
   const handleSubmit = () => {
-    if (selectedLocation && selectedId) {
-      updateLocation(selectedId, {
+    if (selectedLocation && initialId) {
+      updateLocation(initialId, {
         name: selectedLocation.name,
         latitude: selectedLocation.latitude,
         longitude: selectedLocation.longitude,
@@ -77,14 +75,6 @@ const SearchWrapper = () => {
           flexDirection={{ base: "column", md: "row" }}
           gap={{ base: 2, md: 4 }}
         >
-          <FormControl display="inline-block">
-            <FormLabel>Bir konum seçin</FormLabel>
-            <LocationSelect
-              selectedLocation={selectedLocation}
-              setSelectedId={setSelectedId}
-              setSelectedLocation={setSelectedLocation}
-            />
-          </FormControl>
 
           {selectedLocation && (
             <>
@@ -132,13 +122,3 @@ const SearchWrapper = () => {
     </Box>
   );
 };
-
-const LocationEdit = () => {
-  return (
-    <Suspense fallback={<Spinner />}>
-      <SearchWrapper />
-    </Suspense>
-  );
-};
-
-export default LocationEdit;

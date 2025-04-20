@@ -10,11 +10,11 @@ import {
   FormLabel,
   useToast,
 } from "@chakra-ui/react";
-import { useLocationStore } from "../store/useLocationStore";
-import { IconSelect } from "../components/select";
-import { Maps } from "../components/map";
+import { useLocationStore } from "@/shared/store/useLocationStore";
+import { IconSelect } from "@/shared/components/select";
+import { Maps } from "@/shared/components/map";
 
-const AddLocation = () => {
+export const AddLocationContainer = () => {
   const toast = useToast();
   const { addLocation } = useLocationStore();
 
@@ -41,6 +41,7 @@ const AddLocation = () => {
     }
 
     addLocation({
+      id: crypto.randomUUID(),
       name: locationName,
       latitude: selectedLocation.lat,
       longitude: selectedLocation.lng,
@@ -124,4 +125,3 @@ const AddLocation = () => {
   );
 };
 
-export default AddLocation;

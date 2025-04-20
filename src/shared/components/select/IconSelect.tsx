@@ -13,7 +13,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
-import { SymbolOption, symbolOptions } from "@/app/utils/symbolOptions";
+import { SymbolOption, symbolOptions } from "@/shared/utils/symbolOptions";
 
 interface IconSelectProps {
   label: string;

@@ -26,10 +26,10 @@ const DesktopNavigation = () => {
           </Text>
           <HStack spacing={2} flexWrap="wrap">
             <NavLink href="/">Anasayfa</NavLink>
-            <NavLink href="/add-location">Lokasyon Ekle</NavLink>
-            <NavLink href="/locations-list">Lokasyon Listesi</NavLink>
-            <NavLink href="/location-edit">Lokasyon Düzenle</NavLink>
-            <NavLink href="/route">Rotalar</NavLink>
+            <NavLink href="/locations/add">Lokasyon Ekle</NavLink>
+            <NavLink href="/locations">Lokasyon Listesi</NavLink>
+            <NavLink href="/locations/edit">Lokasyon Düzenle</NavLink>
+            <NavLink href="/routes">Rotalar</NavLink>
           </HStack>
         </Stack>
       </Container>

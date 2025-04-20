@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import { useLocationStore } from "@/app/store/useLocationStore";
 import { Dispatch, SetStateAction } from "react";
-import { Location } from "@/app/types/location";
+import { Location } from "@/shared/types/location";
 
-interface LocationSelectProps {
+interface Props {
+  locations: Location[]
   selectedLocation: Location | null;
   setSelectedLocation: Dispatch<SetStateAction<Location | null>>;
   setSelectedId: Dispatch<SetStateAction<string>>;
@@ -14,8 +14,8 @@ const LocationSelect = ({
   selectedLocation,
   setSelectedLocation,
   setSelectedId,
-}: LocationSelectProps) => {
-    const { locations } = useLocationStore();
+  locations,
+}: Props) => {
 
     return (
         <Menu>
