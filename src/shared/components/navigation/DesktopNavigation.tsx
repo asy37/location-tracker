@@ -22,7 +22,7 @@ const DesktopNavigation = () => {
           spacing={4}
         >
           <Text fontSize="xl" fontWeight="bold" color={titleColor}>
-            YukaTech
+            Lokasyon Takipçisi
           </Text>
           <HStack spacing={2} flexWrap="wrap">
             <NavLink href="/">Anasayfa</NavLink>

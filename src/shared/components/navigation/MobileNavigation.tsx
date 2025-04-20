@@ -34,13 +34,13 @@ const MobileNavigation = () => {
       >
         <IoMenuSharp onClick={onOpen} size={24} />
         <Text fontSize="lg" fontWeight="bold" color={titleColor}>
-          YukaTech
+          Lokasyon Takipçisi
         </Text>
       </Box>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader>YukaTech</DrawerHeader>
+          <DrawerHeader>Lokasyon Takipçisi</DrawerHeader>
           <DrawerBody>
             <VStack align="start" spacing={4}>
               <NavLink href="/">
