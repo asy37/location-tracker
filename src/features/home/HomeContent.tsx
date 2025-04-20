@@ -37,7 +37,7 @@ const HomeContent = () => {
           Favori konumlarınızı haritada seçerek ekleyin. Her konuma bir isim
           verin ve işaretçisi için özel bir renk seçin.
         </Text>
-        <Button as={NextLink} href="/add-location" colorScheme="blue" size="md">
+        <Button as={NextLink} href="/locations/add" colorScheme="blue" size="md">
           Lokasyon Ekle
         </Button>
       </Box>
@@ -62,7 +62,7 @@ const HomeContent = () => {
           Tüm kayıtlı konumlarınızı görüntüleyin, ayrıntılarını düzenleyin veya
           kaldırın. Koordinatlarını görmek için bir konuma tıklayın.
         </Text>
-        <Button as={NextLink} href="/locations-list" colorScheme="green" size="md">
+        <Button as={NextLink} href="/locations" colorScheme="green" size="md">
           Lokasyonları Görüntüle
         </Button>
       </Box>
@@ -89,7 +89,7 @@ const HomeContent = () => {
             uygun rotayı oluşturun. Rota, seyahat mesafesini en aza indirmek
             için hesaplanır.
           </Text>
-          <Button as={NextLink} href="/route" colorScheme="purple" size="md">
+          <Button as={NextLink} href="/routes" colorScheme="purple" size="md">
             Rotaları Göster
           </Button>
         </Box>
