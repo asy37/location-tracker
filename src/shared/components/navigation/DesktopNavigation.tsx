@@ -28,7 +28,6 @@ const DesktopNavigation = () => {
             <NavLink href="/">Anasayfa</NavLink>
             <NavLink href="/locations/add">Lokasyon Ekle</NavLink>
             <NavLink href="/locations">Lokasyon Listesi</NavLink>
-            <NavLink href="/locations/edit">Lokasyon Düzenle</NavLink>
             <NavLink href="/routes">Rotalar</NavLink>
           </HStack>
         </Stack>

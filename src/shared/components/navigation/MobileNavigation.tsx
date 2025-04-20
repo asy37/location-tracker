@@ -52,9 +52,6 @@ const MobileNavigation = () => {
               <NavLink href="/locations-list">
                 <Text onClick={onClose}>Lokasyon Listesi</Text>
               </NavLink>
-              <NavLink href="/location-edit">
-                <Text onClick={onClose}>Lokasyon Düzenle</Text>
-              </NavLink>
               <NavLink href="/route">
                 <Text onClick={onClose}>Rotalar</Text>
               </NavLink>
