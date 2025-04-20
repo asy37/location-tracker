@@ -67,11 +67,13 @@ const Locations = () => {
                       </svg>
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent>
+                  <PopoverContent w="fit-content">
                     <Box>
-                      <PopoverHeader>Enlem: {location.latitude}</PopoverHeader>
                       <PopoverHeader>
-                        Boylam: {location.longitude}
+                        Enlem: {location.latitude.toPrecision(6)}
+                      </PopoverHeader>
+                      <PopoverHeader>
+                        Boylam: {location.longitude.toPrecision(6)}
                       </PopoverHeader>
                     </Box>
                   </PopoverContent>

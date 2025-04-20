@@ -11,7 +11,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useLocationStore } from "../store/useLocationStore";
-import { IconSelect } from "../components/icon-select";
+import { IconSelect } from "../components/select";
 import { Maps } from "../components/map";
 
 const AddLocation = () => {
@@ -24,7 +24,9 @@ const AddLocation = () => {
   } | null>(null);
   const [markerColor, setMarkerColor] = useState("#FF0000");
   const [locationName, setLocationName] = useState("");
-  const [selectedIcon, setSelectedIcon] = useState("M3 11 L22 2 L13 21 L11 13 L3 11 Z");
+  const [selectedIcon, setSelectedIcon] = useState(
+    "M3 11 L22 2 L13 21 L11 13 L3 11 Z"
+  );
 
   const handleSubmit = () => {
     if (!selectedLocation || !locationName.trim()) {
@@ -61,14 +63,15 @@ const AddLocation = () => {
   };
 
   return (
-    <Box p={4}>
+    <Box p={2}>
       <VStack spacing={4}>
         <Box
           w="full"
           display="flex"
+          flexDirection={{ base: "column", md: "row" }}
           justifyContent="space-between"
           alignItems="center"
-          gap={4}
+          gap={{ base: 2, md: 4 }}
         >
           <FormControl>
             <FormLabel>Konum Adı</FormLabel>

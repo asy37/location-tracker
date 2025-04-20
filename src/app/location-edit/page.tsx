@@ -7,7 +7,6 @@ import {
   Box,
   FormControl,
   FormLabel,
-  Select,
   VStack,
   Input,
   Button,
@@ -16,13 +15,16 @@ import {
 } from "@chakra-ui/react";
 import { useLocationStore } from "../store/useLocationStore";
 import { Maps } from "../components/map";
+import { LocationSelect } from "../components/select";
 
 const SearchWrapper = () => {
   const searchParams = useSearchParams();
   const { locations, updateLocation } = useLocationStore();
   const toast = useToast();
   const [selectedId, setSelectedId] = useState<string>("");
-  const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<Location | null>(
+    null
+  );
 
   useEffect(() => {
     const id = searchParams.get("id");
@@ -34,13 +36,6 @@ const SearchWrapper = () => {
       }
     }
   }, [searchParams, locations]);
-
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const id = e.target.value;
-    setSelectedId(id);
-    const loc = locations.find((l) => l.id === id);
-    setSelectedLocation(loc ? { ...loc } : null);
-  };
 
   const handleMapUpdate = (lat: number, lng: number) => {
     if (selectedLocation) {
@@ -72,18 +67,23 @@ const SearchWrapper = () => {
   };
 
   return (
-    <Box p={6} display="flex" flexDirection="column" gap={10}>
+    <Box p={6} display="flex" flexDirection="column" gap={10} minH="80vh">
       <VStack spacing={4} align="stretch">
-        <Box w="full" display="flex" justifyContent="space-between" alignItems="center" gap={4}>
+        <Box
+          w="full"
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          flexDirection={{ base: "column", md: "row" }}
+          gap={{ base: 2, md: 4 }}
+        >
           <FormControl display="inline-block">
             <FormLabel>Bir konum seçin</FormLabel>
-            <Select placeholder="Konum Seç" onChange={handleSelectChange} value={selectedId}>
-              {locations.map((loc) => (
-                <option key={loc.id} value={loc.id}>
-                  {loc.name}
-                </option>
-              ))}
-            </Select>
+            <LocationSelect
+              selectedLocation={selectedLocation}
+              setSelectedId={setSelectedId}
+              setSelectedLocation={setSelectedLocation}
+            />
           </FormControl>
 
           {selectedLocation && (
