@@ -62,7 +62,7 @@ const HomeContent = () => {
           Tüm kayıtlı konumlarınızı görüntüleyin, ayrıntılarını düzenleyin veya
           kaldırın. Koordinatlarını görmek için bir konuma tıklayın.
         </Text>
-        <Button as={NextLink} href="/locations" colorScheme="green" size="md">
+        <Button as={NextLink} href="/locations-list" colorScheme="green" size="md">
           Lokasyonları Görüntüle
         </Button>
       </Box>
